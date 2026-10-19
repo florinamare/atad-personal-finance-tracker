@@ -20,6 +20,7 @@ import (
 	"time"
 
 	"atad-project/internal/version"
+	"atad-project/internal/store"
 )
 
 // started is the moment the process came up; /health reports the difference.
@@ -42,6 +43,8 @@ func run() error {
 	log := slog.New(slog.NewTextHandler(os.Stderr, nil))
 
 	mux := http.NewServeMux()
+
+		st := store.New()
 
 	// ---- the common contract: four routes, identical in every project -------
 
@@ -73,11 +76,12 @@ func run() error {
 	// state without restarting the container. If your project persists data,
 	// this clears what was persisted too.
 	mux.HandleFunc("POST /reset", func(w http.ResponseWriter, r *http.Request) {
-		// TODO: clear your own state here.
+				st.Reset()
 		w.WriteHeader(http.StatusNoContent)
 	})
 
 	// ---- your own routes go below -------------------------------------------
+		registerTransactionRoutes(mux, st)
 
 	srv := &http.Server{
 		Addr:         ":8080",
