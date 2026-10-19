@@ -1,3 +1,3 @@
-module github.com/florinamare/ATAD-Personal-Finance-Tracker
+module atad-project
 
-go 1.27.0
+go 1.27
