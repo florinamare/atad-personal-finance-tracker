@@ -35,7 +35,7 @@ FROM alpine:3.21
 
 LABEL org.opencontainers.image.title="Personal Finance Tracker" \
       org.opencontainers.image.authors="Mare Florina <florina.mare@student.upt.ro>" \
-      org.opencontainers.image.source="https://github.com/florinamare/ATAD-Personal-Finance-Tracker"
+            org.opencontainers.image.source="https://github.com/florinamare/atad-personal-finance-tracker"
 
 # Run as an unprivileged user. A container process that does not need root
 # should not have it.
